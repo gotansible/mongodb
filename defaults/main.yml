@@ -1,0 +1,41 @@
+---
+
+mongodb_user: mongodb
+mongodb_group: mongodb
+mongodb_version: 3.0.3
+mongodb_packages:
+  - "mongodb-org={{ mongodb_version }}"
+  - "mongodb-org-server={{ mongodb_version }}"
+  - "mongodb-org-mongos={{ mongodb_version }}"
+  - "mongodb-org-shell={{ mongodb_version }}"
+  - "mongodb-org-tools={{ mongodb_version }}"
+
+mongodb_auth: no
+mongodb_db_dir: /var/lib/mongodb
+mongodb_log_dir: /var/log/mongodb
+
+mongodb_port: 27017
+# Comma separated list of ip addresses to listen on
+mongodb_bind_ip: 0.0.0.0
+mongodb_journal: no
+
+# Append to logpath instead of over-writing
+mongodb_logappend: yes
+mongodb_quota: no
+mongodb_noscripting: no
+mongodb_notablescan: no
+
+# Periodically show cpu and iowait utilization
+mongodb_cpu: no
+mongodb_httpinterface: no
+# Inspect all client data for validity on receipt
+mongodb_objcheck: no
+# Disable data file preallocation.
+mongodb_noprealloc: no
+
+
+#####
+# start on boot
+mongodb_service_enabled: yes
+# current state: started, stopped
+mongodb_service_state: started

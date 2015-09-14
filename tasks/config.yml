@@ -1,0 +1,34 @@
+---
+
+- name: config - data dir
+  file:
+    state: directory
+    path: "{{ mongodb_db_dir }}"
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+    mode: 0755
+
+- name: config - log dir
+  file:
+    state: directory
+    path: "{{ mongodb_log_dir }}"
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+    mode: 0644
+
+- name: config - mongod.conf
+  template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+    mode: 0644
+  notify: restart mongodb
+
+- name: Configuring logrotate
+  template:
+    src: logrotate.d-mongodb.j2
+    dest: /etc/logrotate.d/mongodb
+    owner: root
+    group: root
+    mode: "0644"
