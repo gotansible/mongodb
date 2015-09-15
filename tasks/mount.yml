@@ -1,0 +1,19 @@
+---
+
+- name: mount - create mount points
+  file:
+    state=directory
+    path={{ item.mount_point }}
+  with_items: mongodb_mount
+
+- name: mount - mount devices
+  mount:
+    name: '{{ item.device_name }}'
+    src: '{{ item.mount_point }}'
+    fstype: '{{ item.fstype | default("auto") }}'
+    opts: '{{ item.opts  | default("defaults,nofail") }}'
+    state: '{{ item.state  | default("mounted")  }}'
+    dump: '{{ item.dump | default("0") }}'
+    passno: '{{ item.passno | default("2") }}'
+    fstab: '{{ item.fstab | default("/etc/fstab") }}'
+  with_items: mongodb_mount

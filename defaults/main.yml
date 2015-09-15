@@ -33,6 +33,11 @@ mongodb_objcheck: no
 # Disable data file preallocation.
 mongodb_noprealloc: no
 
+### MOUNTING
+
+mongodb_mount: []
+#  - device_name: /dev/sdf
+#    mount_point: /vol/mongodb
 
 #####
 # start on boot
