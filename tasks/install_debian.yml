@@ -9,6 +9,13 @@
   apt_repository:
     repo: "deb http://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/3.0 multiverse"
     update_cache: yes
+  when: mongodb_version | version_compare('3.0.0', '>=')
+
+- name: Add APT repository
+  apt_repository:
+    repo: "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen"
+    update_cache: yes
+  when: mongodb_version | version_compare('2.9.9', '<=')
 
 - name: Installing package
   apt:
