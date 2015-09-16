@@ -1,7 +1,17 @@
 ---
 
-- name: Configuring service
+- name: service - configuring service
   service:
     name: mongod
     state: "{{ mongodb_service_state }}"
     enabled: "{{ mongodb_service_enabled }}"
+
+
+#- name: service - runit
+#  runit:
+#    name: mongod
+#    enabled: true
+#    state: start
+#    timeout: 60
+#    user:  "{{ mongodb_user }}"
+#    command: /usr/bin/mongod --config /etc/mongod.conf
