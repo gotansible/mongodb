@@ -8,8 +8,8 @@
 
 - name: mount - mount devices
   mount:
-    name: '{{ item.device_name }}'
-    src: '{{ item.mount_point }}'
+    name: '{{ item.mount_point }}'
+    src: '{{ item.device_name }}'
     fstype: '{{ item.fstype | default("auto") }}'
     opts: '{{ item.opts  | default("defaults,nofail") }}'
     state: '{{ item.state  | default("mounted")  }}'
