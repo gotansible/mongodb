@@ -18,7 +18,7 @@
 
 - name: config - mongod.conf
   template:
-    src: mongod.conf.j2
+    src: mongod.conf.yml.j2
     dest: /etc/mongod.conf
     owner: "{{ mongodb_user }}"
     group: "{{ mongodb_group }}"
