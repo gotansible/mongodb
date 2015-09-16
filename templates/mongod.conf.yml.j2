@@ -1,0 +1,31 @@
+# {{ ansible_managed }}
+
+storage:
+  dbPath: "{{ mongodb_db_dir }}"
+  directoryPerDB: true
+  journal:
+    enabled: {{ mongodb_journal | to_nice_json }}
+
+systemLog:
+  destination: file
+  path: "{{ mongodb_log_dir }}/mongod.log"
+  logAppend: {{ mongodb_logappend | to_nice_json }}
+  timeStampFormat: iso8601-utc
+
+processManagement:
+  fork: true
+
+net:
+  port: {{ mongodb_port }}
+  bindIp: {{ mongodb_bind_ip }}
+  wireObjectCheck : false
+  ipv6: false
+    unixDomainSocket:
+      enabled : true
+  http:
+    enabled: true
+    JSONPEnabled: true
+    RESTInterfaceEnabled: true
+
+
+
