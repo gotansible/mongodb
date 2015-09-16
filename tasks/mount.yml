@@ -11,7 +11,7 @@
     name: '{{ item.mount_point }}'
     src: '{{ item.device_name }}'
     fstype: '{{ item.fstype | default("auto") }}'
-    opts: '{{ item.opts  | default("defaults,nofail") }}'
+    opts: '{{ item.opts  | default("defaults,nofail,comment=ansible") }}'
     state: '{{ item.state  | default("mounted")  }}'
     dump: '{{ item.dump | default("0") }}'
     passno: '{{ item.passno | default("2") }}'
