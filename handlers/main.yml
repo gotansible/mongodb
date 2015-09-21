@@ -1,8 +1,8 @@
 ---
 
-- name: restart consul
+- name: restart mongodb
   runit:
-    name=mongod
+    name=mongodb
     enabled=true
     state=up
     timeout=300
