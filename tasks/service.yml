@@ -9,7 +9,10 @@
 - name: service - remove default service
   file:
     state=absent
-    path=/etc/init.d/mongod
+    path={{ item }}
+  with_items:
+    - /etc/init.d/mongod
+    - /etc/init/mongod.*
 
 - name: service - numactl
   shell: "$(which numactl) -- --interleave=all"

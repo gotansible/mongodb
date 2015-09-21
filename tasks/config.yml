@@ -1,6 +1,6 @@
 ---
 
-- name: config - data dir
+- name: config - data dir exists and permissions
   file:
     state: directory
     path: "{{ mongodb_db_dir }}"
