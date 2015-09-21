@@ -1,25 +1,26 @@
 ---
-dependencies: []
+dependencies:
+  - role: gotansible.runit
 
 galaxy_info:
-  author: your name
+  author: Franklin Wise
   description: 
   company: your company (optional)
-  license: license (GPLv2, CC-BY, etc)
+  license: MIT
   min_ansible_version: 1.8
-  #platforms:
-  #- name: Ubuntu
-  #  versions:
+  platforms:
+  - name: Ubuntu
+    versions:
   #  - all
   #  - lucid
   #  - maverick
   #  - natty
   #  - oneiric
-  #  - precise
+    - precise
   #  - quantal
   #  - raring
   #  - saucy
-  #  - trusty
+    - trusty
   #- name: Debian
   #  versions:
   #  - all

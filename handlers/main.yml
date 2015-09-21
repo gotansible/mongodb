@@ -1,5 +1,11 @@
 ---
 
+- name: restart consul
+  runit:
+    name=mongod
+    enabled=true
+    state=up
+    timeout=300
+    action=restart
+  when: not (mongod_service_status is defined and mongod_service_status.restarted) 
 
-- name: restart mongodb
-  command: echo todo

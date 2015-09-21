@@ -5,13 +5,21 @@ exec 2>&1
 # Recommended ulimit values for mongod or mongos
 # See http://docs.mongodb.org/manual/reference/ulimit/#recommended-settings
 #
-limit fsize unlimited unlimited
-limit cpu unlimited unlimited
-limit as unlimited unlimited
-limit nofile 64000 64000
-limit rss unlimited unlimited
-limit nproc 32000 32000
+#limit fsize unlimited unlimited
+#limit cpu unlimited unlimited
+#limit as unlimited unlimited
+#limit nofile 64000 64000
+#limit rss unlimited unlimited
+#limit nproc 32000 32000
 
+ulimit -f unlimited # file size
+ulimit -t unlimited #cpu
+ulimit -d unlimited #data seg size
+ulimit -m unlimited #max memory
+ulimit -v unlimited #virtual memory
+ulimit -x unlimited #file locks
+ulimit -n 64000		#max open file descrxiptions
+ulimit -u 32000		#proccesses
 
 CONF=/etc/mongod.conf
 DAEMON=/usr/bin/mongod
@@ -20,8 +28,7 @@ DAEMONUSER=${DAEMONUSER:-mongodb}
 # Handle NUMA access to CPUs (SERVER-3574)
 # This verifies the existence of numactl as well as testing that the command works
 NUMACTL_ARGS="--interleave=all"
-if which numactl >/dev/null 2>/dev/null && numactl $NUMACTL_ARGS ls / >/dev/null 2>/dev/null
-then
+if which numactl >/dev/null 2>/dev/null && numactl $NUMACTL_ARGS ls / >/dev/null 2>/dev/null; then
   NUMACTL="$(which numactl) -- $NUMACTL_ARGS"
   DAEMON_OPTS=${DAEMON_OPTS:-"--config $CONF"}
 else
@@ -30,5 +37,5 @@ else
 fi
 
 exec chpst-u mondodb $NUMACTL $DAEMON $DAEMON_OPTS
-#/etc/default/mongod
+
 #exec chpst -u mongodb /usr/bin/mongod --config /etc/mongodb.conf 

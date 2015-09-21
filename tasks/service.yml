@@ -3,15 +3,28 @@
 - name: service - configuring service
   service:
     name: mongod
-    state: "{{ mongodb_service_state }}"
-    enabled: "{{ mongodb_service_enabled }}"
+    state: stopped
+    enabled: no
 
+- name: service - remove default service
+  file:
+    state=absent
+    path=/etc/init.d/mongod
 
-#- name: service - runit
-#  runit:
-#    name: mongod
-#    enabled: true
-#    state: start
-#    timeout: 60
-#    user:  "{{ mongodb_user }}"
-#    command: /usr/bin/mongod --config /etc/mongod.conf
+- name: service - numactl
+  shell: "$(which numactl) -- --interleave=all"
+  ignore_errors: yes
+  register: numa_cmd
+
+- debug: var=numa_cmd.stdout
+
+- name: service - runit
+  runit:
+    name: mongodb
+    enabled: true
+    state: start
+    timeout: 300
+    user:  "{{ mongodb_user }}"
+    command: "{{ numa_cmd.stdout }} /usr/bin/mongod --config /etc/mongod.conf"
+  register: mongod_service_status
+
