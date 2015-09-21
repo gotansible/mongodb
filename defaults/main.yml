@@ -44,3 +44,6 @@ mongodb_mount: []
 mongodb_service_enabled: yes
 # current state: started, stopped
 mongodb_service_state: started
+
+
+mongodb_config_storage_directoryPerDB: false
