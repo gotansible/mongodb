@@ -6,7 +6,7 @@
     path: "{{ mongodb_db_dir }}"
     owner: "{{ mongodb_user }}"
     group: "{{ mongodb_group }}"
-    mode: 0755
+    recurse: yes
 
 - name: config - log dir
   file:
